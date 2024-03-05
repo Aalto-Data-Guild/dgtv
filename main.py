@@ -1,8 +1,9 @@
 import streamlit as st
 
 import restaurants
+import weather
 
-# st.set_page_config(page_title="Page Title", layout="wide")
+st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")
 
 st.markdown("""
     <style>
@@ -16,18 +17,15 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("DGTV")
+st.markdown("# DGTV")
 
-st.write("Some text")
-
-col1, col2, col3 = st.columns([2, 10, 3])
+col1, col2, col3 = st.columns([2, 4, 4])
 
 with col1:
-    st.write("Column 1")
-    st.write("More text")
+    weather.widget()
 
 with col2:
-    st.write("Column 2")
+    st.markdown("## Column 2")
     st.write("More text")
 
 with col3:
