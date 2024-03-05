@@ -2,7 +2,7 @@ import streamlit as st
 
 import restaurants
 
-st.set_page_config(page_title="Page Title", layout="wide")
+# st.set_page_config(page_title="Page Title", layout="wide")
 
 st.markdown("""
     <style>
