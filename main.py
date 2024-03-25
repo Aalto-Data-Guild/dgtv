@@ -20,7 +20,7 @@ st.title("DGTV")
 
 st.write("Some text")
 
-col1, col2, col3 = st.columns([2, 10, 3])
+col1, col2, col3 = st.columns([2, 10, 4])
 
 with col1:
     st.write("Column 1")

@@ -1,0 +1,17 @@
+<style>
+    .menu-property {
+        color: lightgray;
+    }
+
+    .menu {
+        color: lightgreen;
+        font-weight: bolder;
+        font-
+    }
+</style>
+
+<div class="menu">
+    {% for menuItem in menu %}
+- {{menuItem.title}} {% for property in menuItem.properties %} <span class="menu-property"> _{{property}}_ </span> {% endfor %}
+{% endfor %}
+</div>
