@@ -1,6 +1,6 @@
 import dataclasses
 import datetime
-from typing import Dict, List
+from typing import Dict, List, Optional
 from jinja2 import Template
 
 import requests
@@ -20,7 +20,7 @@ class RestaurantResponse:
 
     id: int
     name: str
-    dates: Dict[str, List[MenuItem]]
+    dates: Dict[str, Optional[List[MenuItem]]]
 
 
 def get_restaurants(date: datetime.date) -> List[RestaurantResponse]:
@@ -42,6 +42,8 @@ def widget():
     for restaurant in get_restaurants(today_date):
         st.text(restaurant.name)
         items = restaurant.dates.get(today_str)
-        # st.table(items)
+        if not items:
+            st.markdown("No menu available :cry:")
+            continue
         menu = template.render(menu=items)
         st.markdown(menu, unsafe_allow_html=True)
