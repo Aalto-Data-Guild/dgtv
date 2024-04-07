@@ -2,6 +2,7 @@ import time
 
 import streamlit as st
 
+import events
 import restaurants
 import weather
 
@@ -25,11 +26,11 @@ st.markdown(
 main_container = st.empty()
 
 while True:
-    # *data update logic*
+    # *data update logic* ?
 
     with main_container:
         # column widths can be adjusted later
-        col1, col2, col3 = st.columns([2, 4, 4], gap='medium')
+        col1, col2, col3, col4 = st.columns([2, 2, 4, 2], gap='medium')
 
         with col1:
             weather.widget()
@@ -40,5 +41,8 @@ while True:
 
         with col3:
             restaurants.widget()
+
+        with col4:
+            events.widget()
 
     time.sleep(1)
