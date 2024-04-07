@@ -33,7 +33,6 @@ def get_restaurants(date: datetime.date) -> List[RestaurantResponse]:
 
 
 def widget():
-    st.markdown('**Menu:**')
     today_date = datetime.datetime.today().date()
     today_str = today_date.strftime("%Y-%m-%d")
     with open("restaurants.html", "r") as f:
