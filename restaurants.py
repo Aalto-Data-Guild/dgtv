@@ -23,13 +23,14 @@ class RestaurantResponse:
     dates: Dict[str, Optional[List[MenuItem]]]
 
 
+@st.cache_data
 def get_restaurants(date: datetime.date) -> List[RestaurantResponse]:
     date_str = date.strftime("%Y-%m-%d")
     restaurant_ids_str = ','.join(str(rid) for rid in RESTAURANT_IDS)
 
     response = requests.get(KANTTIINIT_URL_MASK.format(restaurant_ids_str, date_str))
-    return [RestaurantResponse(int(id), RESTAURANT_NAMES.get(int(id), "Place"), restaurant_json) for (id, restaurant_json) in
-            response.json().items()]
+    return [RestaurantResponse(int(id), RESTAURANT_NAMES.get(int(id), "Place"), restaurant_json) for
+            (id, restaurant_json) in response.json().items()]
 
 
 def widget():
