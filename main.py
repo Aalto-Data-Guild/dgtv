@@ -2,9 +2,7 @@ import time
 
 import streamlit as st
 
-import events
-import restaurants
-import weather
+from widgets import events, restaurants, weather
 
 # Setting up the page
 st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")

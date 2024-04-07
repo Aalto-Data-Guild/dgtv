@@ -3,6 +3,11 @@
 Planned widgets:
 - Kantiinit menus (Anton)
 - Weather (Lassi)
+- Upcoming events from Ilmomasiina (Ilia)
 - Instagram & Telegram posts
-- Upcoming events from Ilmomasiina
-- Notifications/alerts (?)
+- Announcements (tg bot?)
+
+- Sponsors
+
+
+- G-index 

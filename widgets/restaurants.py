@@ -36,7 +36,7 @@ def get_restaurants(date: datetime.date) -> List[RestaurantResponse]:
 def widget():
     today_date = datetime.datetime.today().date()
     today_str = today_date.strftime("%Y-%m-%d")
-    with open("restaurants.html", "r") as f:
+    with open("widgets/restaurants.html", "r") as f:
         template = Template(f.read())
 
     for restaurant in get_restaurants(today_date):
