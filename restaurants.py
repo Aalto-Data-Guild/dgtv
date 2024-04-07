@@ -40,7 +40,7 @@ def widget():
         template = Template(f.read())
 
     for restaurant in get_restaurants(today_date):
-        st.text(restaurant.name)
+        st.markdown(f"#### :green[{restaurant.name}]")
         items = restaurant.dates.get(today_str)
         if not items:
             st.markdown("No menu available :cry:")
