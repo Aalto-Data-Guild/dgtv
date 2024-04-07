@@ -1,0 +1,16 @@
+<style>
+    .menu-property {
+        color: gray;
+    }
+
+    .menu {
+        font-weight: bolder;
+        line-height: 0.9rem;
+    }
+</style>
+
+<div class="menu">
+    {% for menuItem in menu %}
+ {{menuItem.title}} {% for property in menuItem.properties %} <span class="menu-property"> _{{property}}_ </span> {% endfor %}
+{% endfor %}
+</div>
