@@ -3,22 +3,15 @@ import time
 import streamlit as st
 
 from widgets import events, restaurants, weather
+import ui
 
 # Setting up the page
 st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")
 
-# streamlit fluff is removed through config.toml
-
-# logo next to header, vertically aligned
-st.markdown(
-    """
-    <div style="display: flex; align-items: center;">
-        <img src="https://dataguild.fi/wp-content/uploads/2023/07/dataguild_logo_raster_1280x1120_black_transparent.png" width=64>
-        <h1 style="margin: 0; padding-left: 10px;">DGTV</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# some streamlit fluff is removed through config.toml
+ui.add_logo()
+ui.remove_header()
+ui.remove_container_padding()
 
 # single element container to ensure the dashboard gets updated
 main_container = st.empty()
