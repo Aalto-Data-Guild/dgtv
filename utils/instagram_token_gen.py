@@ -28,15 +28,32 @@ def authenticate() -> str:
 
 
 def code_to_token(code: str):
-    payload = {
+    params = {
         'client_id': APP_ID,
         'client_secret': APP_SECRET,
         'grant_type': 'authorization_code',
         'redirect_uri': REDIRECT_URI,
         'code': code
     }
+
     session = requests.Session()
-    r = session.post('https://api.instagram.com/oauth/access_token', data=payload, timeout=3)
+    r = session.post('https://api.instagram.com/oauth/access_token', data=params, timeout=3)
+
+    if not r.ok:
+        raise SystemExit('Could not retrieve the token: ' + r.json()['error_message']
+                         if 'application/json' in r.headers.get('Content-Type', '') else r.content.decode())
+    return r.json()['access_token']
+
+
+def get_long_lived_token(short_lived_token: str) -> str:
+    params = {
+        'client_id': APP_ID,
+        'client_secret': APP_SECRET,
+        'grant_type': 'ig_exchange_token',
+        'access_token': short_lived_token
+    }
+
+    r = requests.get('https://graph.instagram.com/access_token', params)
 
     if not r.ok:
         raise SystemExit('Could not retrieve the token: ' + r.json()['error_message']
@@ -48,7 +65,9 @@ def main():
     intro()
     access_code = authenticate()
     token = code_to_token(access_code)
-    print('Your token is:', token)
+    print('Your short-lived token is:', token)
+    token = get_long_lived_token(token)
+    print('Your long-lived token is:', token)
 
 
 if __name__ == '__main__':
