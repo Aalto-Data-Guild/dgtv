@@ -2,7 +2,7 @@ import time
 
 import streamlit as st
 
-from widgets import events, restaurants, weather
+from widgets import events, restaurants, weather, instagram
 import ui
 
 # Setting up the page
@@ -29,8 +29,7 @@ while True:
             weather.widget()
 
         with col2:
-            st.markdown("## Column 2")
-            st.write(f"Current time&date: {time.strftime('%H:%M:%S %d-%m-%Y')}")
+            instagram.widget()
 
         with col3:
             restaurants.widget()
