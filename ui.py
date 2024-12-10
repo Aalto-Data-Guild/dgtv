@@ -10,7 +10,7 @@ def add_logo():
     update_html(
         """
         <div style="display: flex; align-items: center;">
-            <img src="https://dataguild.fi/wp-content/uploads/2023/07/dataguild_logo_raster_1280x1120_black_transparent.png" width=64>
+            <img src="https://dataguild.fi/wp-content/uploads/2023/07/dataguild_logo_raster_1280x1120_white_transparent.png" width=64>
             <h1 style="margin: 0; padding-left: 10px; padding-top: 0.9rem;">DGTV</h1>
         </div>   
         """
@@ -43,5 +43,16 @@ def remove_container_padding():
             padding-top:1rem; padding-left:2rem
             }
         </style>
+        """
+    )
+    
+def update_font_size():
+    update_html(
+        """
+        <style>
+            div, p {
+                font-size: 20px;
+            }
+        <style>
         """
     )

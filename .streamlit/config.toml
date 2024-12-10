@@ -1,8 +1,10 @@
 [theme]
-base="light"
+base="dark"
+backgroundColor="#272727"
+primaryColor="#f9f9f9"
 # Font family for all text in the app, except code blocks. One of "sans serif",
 # "serif", or "monospace".
-font = "monospace"
+font = "sans serif"
 
 [ui]
 hideTopBar=true

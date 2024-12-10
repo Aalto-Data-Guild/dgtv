@@ -13,6 +13,8 @@ ui.add_logo()
 ui.remove_header()
 ui.remove_container_padding()
 
+ui.update_font_size()
+
 # single element container to ensure the dashboard gets updated
 main_container = st.empty()
 
