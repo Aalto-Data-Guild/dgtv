@@ -2,8 +2,6 @@
 base="dark"
 backgroundColor="#272727"
 primaryColor="#f9f9f9"
-# Font family for all text in the app, except code blocks. One of "sans serif",
-# "serif", or "monospace".
 font = "sans serif"
 
 [ui]
@@ -14,3 +12,9 @@ developmentMode=false
 
 [client]
 toolbarMode = "minimal"
+
+[server]
+baseUrlPath = "/tv"
+
+[browser]
+gatherUsageStats = false
