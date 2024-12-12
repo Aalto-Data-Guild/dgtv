@@ -8,7 +8,6 @@ from requests_ratelimiter import LimiterAdapter
 
 BASE_API_URL = 'https://graph.instagram.com'
 
-dotenv.load_dotenv('.env')
 access_token = os.getenv('INSTAGRAM_ACCESS_TOKEN')
 
 # use cached session to avoid api calls on every update
@@ -60,8 +59,8 @@ def get_carousel_children(media_id: str) -> List[str]:
 
 
 def display_carousel(media_id: str):
-    children = [get_simple_media(child_id) for child_id in get_carousel_children(media_id)]
-    st.image(children[0]['media_url'])
+    displayed_child = get_simple_media(get_carousel_children(media_id)[0])
+    st.image(displayed_child['media_url'])
 
 
 def display_image(media_id: str):
