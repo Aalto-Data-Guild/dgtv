@@ -12,6 +12,12 @@ def add_logo():
         <div style="display: flex; align-items: center;">
             <img src="https://dataguild.fi/wp-content/uploads/2023/07/dataguild_logo_raster_1280x1120_white_transparent.png" width=64>
             <h1 style="margin: 0; padding-left: 10px; padding-top: 0.9rem;">DGTV</h1>
+            <div style="display: flex; align-items: center; padding-left: 10px; column-gap: 2rem; padding-left: 2.5rem">
+                <img src="https://dataguild.fi/wp-content/uploads/2024/01/EY.png" height=64 style="margin-right: 1rem" />
+                <img src="https://dataguild.fi/wp-content/uploads/2024/01/netlightllogo.png" height=64 />
+                <img src="https://dataguild.fi/wp-content/uploads/2024/01/codentologo.png" height=64 />
+                <img src="https://dataguild.fi/wp-content/uploads/2024/01/twoday-wordmark-RGB_WHITE.png" height=64 />
+            </div>
         </div>   
         """
     )
