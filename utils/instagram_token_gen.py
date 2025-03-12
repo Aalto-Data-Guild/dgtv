@@ -18,7 +18,7 @@ Do not log out before the next step.""")
 
 
 def authenticate() -> str:
-    link = "https://api.instagram.com/oauth/authorize?" + \
+    link = "https://graph.instagram.com/oauth/authorize?" + \
            f"client_id={APP_ID}&redirect_uri={REDIRECT_URI}&" + \
            "scope=user_profile,user_media&response_type=code"
     print('Access', link)
