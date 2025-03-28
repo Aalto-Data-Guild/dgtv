@@ -7,8 +7,8 @@ import requests
 import streamlit as st
 
 KANTTIINIT_URL_MASK = "https://kitchen.kanttiinit.fi/menus?lang=en&restaurants={}&days={}"
-RESTAURANT_IDS = [2, 3, 52]
-RESTAURANT_NAMES = {2: "CS", 3: "Täffä", 52: "A-Bloc"}
+RESTAURANT_IDS = [2, 3, 5]
+RESTAURANT_NAMES = {2: "CS", 3: "Täffä", 5: "TUAS"}
 
 
 @dataclasses.dataclass
