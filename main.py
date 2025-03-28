@@ -2,8 +2,8 @@ import time
 
 import streamlit as st
 
-from widgets import events, restaurants, weather, instagram
 import ui
+from widgets import restaurants, weather, kesakuntoon, countdownToWappu
 
 # Setting up the page
 st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")
@@ -29,12 +29,12 @@ while True:
             weather.widget()
 
         with col2:
-            instagram.widget()
+            kesakuntoon.widget()
 
         with col3:
             restaurants.widget()
 
         with col4:
-            events.widget()
+            countdownToWappu.widget()
 
     time.sleep(1)

@@ -1,9 +1,11 @@
-streamlit
+streamlit~=1.31.1
 openmeteo-requests
 requests-cache
 retry-requests
 numpy
-pandas
+pandas~=2.2.1
 python-dotenv
-requests
+requests~=2.31.0
 requests-ratelimiter
+altair~=5.2.0
+Jinja2~=3.1.3
