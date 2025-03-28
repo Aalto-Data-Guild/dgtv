@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-wappuAnnounced=False  # Change this when wappu is announced
+wappuAnnounced=True  # Change this when wappu is announced
 
 def load_countDown():
     now = datetime.now()
@@ -34,7 +34,6 @@ def widget():
     else :
         st.markdown('## Days until Wappu:')
     time = load_countDown()
-
 
     match len(time):
         case 0:
