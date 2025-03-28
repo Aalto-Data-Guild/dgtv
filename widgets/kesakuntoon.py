@@ -1,7 +1,5 @@
 import os
-import time
 
-import altair as alt
 import pandas as pd
 import requests
 import requests_cache
@@ -35,6 +33,8 @@ def update_section_index(sections):
     if 'section_index' not in st.session_state:
         st.session_state.section_index = 0
 
+    st.session_state.section_index = (st.session_state.section_index + 1) % len(sections)
+
     title, content = sections[st.session_state.section_index]
     if isinstance(content, pd.DataFrame) and content.empty:
         st.session_state.section_index = (st.session_state.section_index + 1) % len(sections)
@@ -51,21 +51,11 @@ def display_content(title, content):
     with section_container:
         if isinstance(content, pd.DataFrame) and not content.empty:
             if title == "Participants":
-                alt.themes.enable('dark')
-                chart = alt.Chart(content).mark_bar().encode(
-                    x='name',
-                    y='value',
-                    color=alt.condition(
-                        alt.datum.name == 'DG',  # Condition to highlight the 'DG' bar
-                        alt.value('gray'),  # Color for the 'DG' bar
-                        alt.value('blue')  # Color for other bars
-                    )
-                )
-                st.altair_chart(chart, use_container_width=True)
+                st.bar_chart(content.set_index('name')['value'])
             else:
                 styled_content = content.style.map(
                     lambda x: 'font-weight: bold' if x == 'DG' else ''
-                )
+                ).format(precision=1)
                 st.table(styled_content)
         elif not isinstance(content, pd.DataFrame) and content != "No data available" and content != []:
             st.write(content)
@@ -79,10 +69,6 @@ def widget():
         sections = get_sections(data)
         title, content = update_section_index(sections)
         display_content(title, content)
-
-        time.sleep(10)
-        st.session_state.section_index = (st.session_state.section_index + 1) % len(sections)
-        st.rerun()
 
     except requests.RequestException as e:
         st.error(f"Failed to fetch data: {e}")
