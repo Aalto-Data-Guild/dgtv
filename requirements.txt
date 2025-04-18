@@ -6,6 +6,5 @@ numpy
 pandas~=2.2.1
 python-dotenv
 requests~=2.31.0
-requests-ratelimiter
 altair~=5.2.0
 Jinja2~=3.1.3

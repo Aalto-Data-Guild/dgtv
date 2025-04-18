@@ -28,9 +28,6 @@ while True:
         with col1:
             weather.widget()
 
-        with col2:
-            kesakuntoon.widget()
-
         with col3:
             restaurants.widget()
 
