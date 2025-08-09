@@ -1,22 +1,39 @@
-import streamlit as st
-import openmeteo_requests
-import requests_cache
-import pandas as pd
 import altair as alt
+import openmeteo_requests
+import pandas as pd
+import requests_cache
+import streamlit as st
 from retry_requests import retry
+from widgets.base_widget import BaseWidget
 
-def widget():
-    st.markdown("## Weather")
-    current_temperature, current_weather_code, forecast_df = get_weather_data()
+class WeatherWidget(BaseWidget):
+    name = 'Weather'
 
-    st.markdown(f'Current temperature: {round(current_temperature, 1)}')
+    def render(self):
+        st.markdown("# Weather")
+        current_temperature, current_weather_code, forecast_df = get_weather_data()
 
-    st.markdown("### Forecast")
-    forecast_df = forecast_df.rename(columns = {'date':'Time', 'temperature':'Temperature', 'precipitation':'Precipitation'})
-    base = alt.Chart(forecast_df).encode(alt.X('hoursminutes(Time):O').title(None)).properties(height = 200, width = 200)
-    line = base.mark_line(color = 'red').encode(alt.Y('Temperature').title('Temperature (°C)', titleColor = '#57A44C'))
-    bar = base.mark_bar(color = 'blue').encode(alt.Y('Precipitation').title('Precipitation (mm)', titleColor='#5276A7'))
-    st.altair_chart(alt.layer(line, bar).resolve_scale(y = 'independent'), use_container_width = True)
+        st.markdown(f'### Current Temperature: **{round(current_temperature, 1)}°C**')
+
+        st.markdown("### Forecast")
+        forecast_df = forecast_df.rename(
+            columns={'date': 'Time', 'temperature': 'Temperature', 'precipitation': 'Precipitation'})
+
+        base = alt.Chart(forecast_df).encode(
+            alt.X('hoursminutes(Time):O', title=None, axis=alt.Axis(labelAngle=-45))
+        ).properties(
+            height=300, width=600
+        )
+
+        line = base.mark_line(color='red', point=alt.OverlayMarkDef(color='red')).encode(
+            alt.Y('Temperature', title='Temperature (°C)', axis=alt.Axis(titleColor='#FF6347'))
+        )
+
+        bar = base.mark_bar(color='blue', opacity=0.6).encode(
+            alt.Y('Precipitation', title='Precipitation (mm)', axis=alt.Axis(titleColor='#1E90FF'))
+        )
+
+        st.altair_chart(alt.layer(line, bar).resolve_scale(y='independent'), use_container_width=True)
 
 def get_weather_data():
     cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)

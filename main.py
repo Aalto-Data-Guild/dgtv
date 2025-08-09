@@ -1,9 +1,9 @@
 import time
-
 import streamlit as st
-
 import ui
-from widgets import restaurants, weather, kesakuntoon, countdownToWappu
+import os
+
+from widgets import WeatherWidget, RestaurantsWidget, CountdownToWappuWidget
 
 # Setting up the page
 st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")
@@ -18,20 +18,23 @@ ui.update_font_size()
 # single element container to ensure the dashboard gets updated
 main_container = st.empty()
 
+def init_widgets():
+    return {
+        'weather': WeatherWidget(),
+        'restaurants': RestaurantsWidget(),
+        'countdown_to_wappu': CountdownToWappuWidget(os.getenv('WAPPU_ANNOUNCED', 'false').lower() == 'true'),
+    }
+
+widgets = init_widgets()
+
+def get_visible_widgets():
+    return [widget for widget in widgets.values() if widget.is_visible]
+
 while True:
-    # *data update logic* ?
-
+    visible_widgets = get_visible_widgets()
     with main_container:
-        # column widths can be adjusted later
-        col1, col2, col3, col4 = st.columns([2, 2, 4, 2], gap='medium')
-
-        with col1:
-            weather.widget()
-
-        with col3:
-            restaurants.widget()
-
-        with col4:
-            countdownToWappu.widget()
-
+        cols = st.columns([2]*len(visible_widgets), gap='medium')
+        for col, widget in zip(cols, visible_widgets):
+            with col:
+                widget.render()
     time.sleep(1)

@@ -5,6 +5,7 @@ from jinja2 import Template
 
 import requests
 import streamlit as st
+from widgets.base_widget import BaseWidget
 
 KANTTIINIT_URL_MASK = "https://kitchen.kanttiinit.fi/menus?lang=en&restaurants={}&days={}"
 RESTAURANT_IDS = [2, 3, 5]
@@ -33,17 +34,32 @@ def get_restaurants(date: datetime.date) -> List[RestaurantResponse]:
             (id, restaurant_json) in response.json().items()]
 
 
-def widget():
-    today_date = datetime.datetime.today().date()
-    today_str = today_date.strftime("%Y-%m-%d")
-    with open("widgets/restaurants.html", "r") as f:
-        template = Template(f.read())
+class RestaurantsWidget(BaseWidget):
+    name = 'Restaurants'
 
-    for restaurant in get_restaurants(today_date):
-        st.markdown(f"#### :green[{restaurant.name}]")
-        items = restaurant.dates.get(today_str)
-        if not items:
-            st.markdown("No menu available :cry:")
-            continue
-        menu = template.render(menu=items)
-        st.markdown(menu, unsafe_allow_html=True)
+    def render(self):
+        st.markdown("# Restaurants")
+
+        today_date = datetime.datetime.today().date()
+        today_str = today_date.strftime("%Y-%m-%d")
+        with open("widgets/restaurants.html", "r") as f:
+            template = Template(f.read())
+        
+        closed = []
+
+        for restaurant in get_restaurants(today_date):
+            items = restaurant.dates.get(today_str)
+            if not items:
+                closed.append(restaurant)
+                continue
+
+            st.markdown(f"#### :green[{restaurant.name}]")
+            if not items:
+                st.markdown("No menu available :cry:")
+                continue
+            menu = template.render(menu=items)
+            st.markdown(menu, unsafe_allow_html=True)
+        
+        if closed:
+            st.markdown("#### :red[Closed]")
+            st.markdown(", ".join(restaurant.name for restaurant in closed))
