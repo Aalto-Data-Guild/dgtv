@@ -3,7 +3,7 @@ import streamlit as st
 import ui
 import os
 
-from widgets import WeatherWidget, RestaurantsWidget, CountdownToWappuWidget
+from widgets import WeatherWidget, RestaurantsWidget, CountdownToWappuWidget, EventsWidget
 
 # Setting up the page
 st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")
@@ -23,6 +23,7 @@ def init_widgets():
         'weather': WeatherWidget(),
         'restaurants': RestaurantsWidget(),
         'countdown_to_wappu': CountdownToWappuWidget(os.getenv('WAPPU_ANNOUNCED', 'false').lower() == 'true'),
+        'events': EventsWidget(os.getenv('EVENTS_API_URL', 'https://events.dataguild.fi/api/events')),
     }
 
 widgets = init_widgets()
