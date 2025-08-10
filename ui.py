@@ -22,13 +22,31 @@ def add_logo():
         """
     )
 
+def add_footer():
+    update_html(
+        """
+        <footer style="text-align: center; padding-top: 1rem;">
+            <p style="color: #888;">Made with ❤️ by <a href="https://dataguild.fi" style="color: #888;">Data Guild</a> </p>
+        </footer>
+        <style>
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+        </style> 
+        """
+    )
 
 # remove the sticky header above the logo
 def remove_header():
     update_html(
         """
         <style>
-            #MainMenu, header, footer {visibility: hidden;}
+            #MainMenu, header {visibility: hidden;}
 
             /* This code gets the first element on the sidebar,
             and overrides its default styling */
