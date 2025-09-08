@@ -29,14 +29,17 @@ class EventsWidget(BaseWidget):
             _date = datetime.fromisoformat(event['date'])
             if _date.tzinfo is None:
                 _date = _date.replace(tzinfo=timezone.utc).astimezone(tz=None)
-            total_signups = sum([quota['signupCount'] for quota in event['quotas']])
-            total_seats = sum([quota['size'] for quota in event['quotas']])
             st.write(f"### {event['title']} - {_date.strftime('%d.%m %H:%M')}")
 
             location = event.get('location', None)
             if location:
                 st.write(f":material/location_on: {location}")
 
+            if any('size' not in quota or quota['size'] is None for quota in event['quotas']):
+                continue
+
+            total_seats = sum([quota['size'] if 'size' in quota else 0 for quota in event['quotas']])
             if total_seats > 0:
-                st.progress(total_signups / total_seats if total_seats > 0 else 0, 
-                        text=f"{total_signups}/{total_seats} seats filled")
+                total_signups = sum([quota['signupCount'] for quota in event['quotas']])
+                st.progress(total_signups / total_seats if total_seats > 0 else 0,
+                            text=f"{total_signups}/{total_seats} seats filled")
