@@ -13,7 +13,8 @@ class WeatherWidget(BaseWidget):
         st.markdown("# Weather")
         current_temperature, current_weather_code, forecast_df = get_weather_data()
 
-        st.markdown(f'### Current Temperature: **{round(current_temperature, 1)}°C**')
+        # st.markdown(f'### Current Temperature: **{round(current_temperature, 1)}°C**')
+        st.metric(label="Current Temperature", value=f"{round(current_temperature, 1)} °C")
 
         st.markdown("### Forecast")
         forecast_df = forecast_df.rename(
@@ -25,12 +26,15 @@ class WeatherWidget(BaseWidget):
             height=300, width=600
         )
 
-        line = base.mark_line(color='red', point=alt.OverlayMarkDef(color='red')).encode(
-            alt.Y('Temperature', title='Temperature (°C)', axis=alt.Axis(titleColor='#FF6347'))
+        COLOR_BLUE = '#00d4ff'
+        COLOR_SILVER = '#4ade80'
+
+        line = base.mark_line(color=COLOR_SILVER, point=alt.OverlayMarkDef(color=COLOR_SILVER)).encode(
+            alt.Y('Temperature', title='Temperature (°C)', axis=alt.Axis(titleColor=COLOR_SILVER))
         )
 
-        bar = base.mark_bar(color='blue', opacity=0.6).encode(
-            alt.Y('Precipitation', title='Precipitation (mm)', axis=alt.Axis(titleColor='#1E90FF'))
+        bar = base.mark_bar(color=COLOR_BLUE, opacity=0.6).encode(
+            alt.Y('Precipitation', title='Precipitation (mm)', axis=alt.Axis(titleColor=COLOR_BLUE))
         )
 
         st.altair_chart(alt.layer(line, bar).resolve_scale(y='independent'), use_container_width=True)

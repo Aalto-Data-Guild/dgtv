@@ -1,17 +1,28 @@
 <style>
+    .restaurant-name {
+        color: #00d4ff;
+        font-weight: bolder;
+        font-size: 24px;
+        line-height: 1rem;
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
     .menu-property {
-        color: gray;
+        color: grey;
     }
 
     .menu {
-        font-weight: bolder;
+        /*font-weight: bolder;*/
         font-size: 20px;
-        line-height: 1rem;
+        /*line-height: 1rem*/
     }
 </style>
 
 <div class="menu">
+    <h3 class="restaurant-name">{{restaurant}}</h3>
     {% for menuItem in menu %}
- {{menuItem.title}} {% for property in menuItem.properties %} <span class="menu-property"> _{{property}}_ </span> {% endfor %}
+ {{menuItem.title}} {% for property in menuItem.properties %} <span class="menu-property"><i>{{property}}</i></span> {% endfor %}
+    <br/>
 {% endfor %}
 </div>

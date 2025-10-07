@@ -53,12 +53,12 @@ class RestaurantsWidget(BaseWidget):
                 closed.append(restaurant)
                 continue
 
-            st.markdown(f"#### :green[{restaurant.name}]")
             if not items:
-                st.markdown("No menu available :cry:")
+                st.markdown(f"{restaurant.name}: No menu available :cry:")
                 continue
-            menu = template.render(menu=items)
-            st.markdown(menu, unsafe_allow_html=True)
+            else:
+                menu = template.render(menu=items, restaurant=restaurant.name)
+            st.html(menu)
         
         if closed:
             st.markdown("#### :red[Closed]")
