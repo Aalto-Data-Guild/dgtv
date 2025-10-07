@@ -1,6 +1,7 @@
 import streamlit as st
 import requests as r
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from widgets.base_widget import BaseWidget
 
 def load_events(api_url):
@@ -28,7 +29,8 @@ class EventsWidget(BaseWidget):
         for event in events:
             _date = datetime.fromisoformat(event['date'])
             if _date.tzinfo is None:
-                _date = _date.replace(tzinfo=timezone.utc).astimezone(tz=None)
+                _date = _date.replace(tzinfo=timezone.utc)
+            _date = _date.astimezone(ZoneInfo('Europe/Helsinki'))
             st.write(f"### {event['title']} - {_date.strftime('%d.%m %H:%M')}")
 
             location = event.get('location', None)
