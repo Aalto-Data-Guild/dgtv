@@ -10,11 +10,6 @@ st.set_page_config(page_title="DGTV", layout="wide", page_icon="📺")
 
 # some streamlit fluff is removed through config.toml
 ui.add_logo()
-ui.remove_header()
-ui.add_footer()
-ui.remove_container_padding()
-
-ui.update_font_size()
 
 # single element container to ensure the dashboard gets updated
 main_container = st.empty()
@@ -28,6 +23,12 @@ def init_widgets():
     }
 
 widgets = init_widgets()
+
+ui.remove_header()
+ui.add_footer()
+ui.remove_container_padding()
+
+ui.update_font_size()
 
 def get_visible_widgets():
     return [widget for widget in widgets.values() if widget.is_visible]

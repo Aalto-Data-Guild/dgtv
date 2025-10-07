@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def update_html(content: str):
-    st.markdown(content, unsafe_allow_html=True)
+    st.html(content)
 
 
 # logo next to header, vertically aligned
@@ -18,7 +18,7 @@ def add_logo():
                 <img src="https://dataguild.fi/wp-content/uploads/2024/01/codentologo.png" height=64 />
                 <img src="https://dataguild.fi/wp-content/uploads/2024/01/twoday-wordmark-RGB_WHITE.png" height=64 />
             </div>
-        </div>   
+        </div>
         """
     )
 
